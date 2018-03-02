@@ -1,0 +1,30 @@
+apply plugin: 'jdepend'
+
+jdepend {
+    toolVersion '2.9.1'
+}
+
+task jdepend(type: JDepend, dependsOn: 'compileDebugSources') {
+    description 'Analyzes package dependencies and generates design quality metrics.'
+    group 'verification'
+
+    classesDirs = files(file("$buildDir/intermediates/classes/debug"))
+
+    reports {
+        xml.enabled true
+        text.enabled false
+    }
+}
+
+task jdependReport(dependsOn: 'jdepend') {
+    description 'Generates a HTML report after running JDepend analysis.'
+    group 'verification'
+
+    doLast {
+        ant.xslt(
+                in: "$buildDir/reports/jdepend/jdepend.xml",
+                style: "$rootDir/config/jdepend/jdepend-report.xslt",
+                out: "$buildDir/reports/jdepend/jdepend.html"
+        )
+    }
+}

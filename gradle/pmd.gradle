@@ -1,0 +1,25 @@
+apply plugin: 'pmd'
+
+pmd {
+    toolVersion '6.1.0'
+}
+
+task pmd(type: Pmd) {
+    description 'Analyzes source code to look for common programming flaws.'
+    group 'verification'
+
+    outputs.upToDateWhen { false }
+
+    ruleSets = []
+    ruleSetFiles = files("$rootDir/config/pmd/pmd.xml")
+    source = fileTree('src/main/java')
+    include '**/*.java'
+
+    consoleOutput true
+    ignoreFailures true
+
+    reports {
+        xml.enabled true
+        html.enabled true
+    }
+}

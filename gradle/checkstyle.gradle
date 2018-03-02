@@ -1,0 +1,27 @@
+apply plugin: 'checkstyle'
+
+checkstyle {
+    toolVersion '8.8'
+}
+
+task checkstyle(type: Checkstyle) {
+    description 'Runs Checkstyle inspection against Android sourcesets.'
+    group 'verification'
+
+    outputs.upToDateWhen { false }
+
+    configFile file("$rootDir/config/checkstyle/checkstyle.xml")
+    source fileTree('src/main/java')
+    include '**/*.java'
+
+    classpath = files()
+    showViolations true
+    ignoreFailures true
+
+    reports {
+        xml.enabled true
+        html.enabled true
+    }
+
+    configProperties.lineWidth = 120
+}

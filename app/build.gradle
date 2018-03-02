@@ -1,6 +1,10 @@
 apply plugin: 'com.android.application'
 
 apply from: "${rootDir}/gradle/coverage.gradle"
+apply from: "${rootDir}/gradle/checkstyle.gradle"
+apply from: "${rootDir}/gradle/findbugs.gradle"
+apply from: "${rootDir}/gradle/jdepend.gradle"
+apply from: "${rootDir}/gradle/pmd.gradle"
 
 android {
     compileSdkVersion 27
@@ -30,3 +34,5 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 }
+
+check.dependsOn 'checkstyle', 'findbugs', 'jdependReport', 'pmd'
