@@ -1,0 +1,58 @@
+apply plugin: 'jacoco'
+
+jacoco {
+    toolVersion = '0.8.1'
+}
+
+android {
+    buildTypes {
+        debug {
+            testCoverageEnabled true
+        }
+    }
+    testOptions {
+        unitTests.all {
+            jacoco {
+                includeNoLocationClasses true
+            }
+        }
+    }
+}
+
+afterEvaluate {
+    android.applicationVariants.all { variant ->
+        def name = variant.name
+        def testTaskName = "test${name.capitalize()}UnitTest"
+
+        tasks.create(
+                type: JacocoReport,
+                name: "createUnified${name.capitalize()}CoverageReport",
+                dependsOn: ["$testTaskName", 'createDebugCoverageReport']) {
+            group = 'verification'
+            description = "Creates unified test coverage reports for the ${name} variant."
+
+            classDirectories = fileTree(
+                    dir: "$buildDir/intermediates/classes/$name",
+                    excludes: [
+                            '**/R.class',
+                            '**/R$*.class',
+                            '**/Manifest.class',
+                            '**/Manifest$*.class',
+                            '**/BuildConfig.class',
+                    ]
+            )
+            sourceDirectories = files(
+                    ["$projectDir/src/main/java"] + android.sourceSets[name].java.srcDirs
+            )
+            executionData = fileTree(dir: buildDir, includes: [
+                    "jacoco/${testTaskName}.exec",
+                    'outputs/code-coverage/connected/*coverage.ec',
+            ])
+
+            reports {
+                xml.enabled = true
+                html.enabled = true
+            }
+        }
+    }
+}

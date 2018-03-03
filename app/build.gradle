@@ -1,5 +1,7 @@
 apply plugin: 'com.android.application'
 
+apply from: "${rootDir}/gradle/coverage.gradle"
+
 android {
     compileSdkVersion 27
     defaultConfig {
