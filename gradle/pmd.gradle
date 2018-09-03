@@ -1,7 +1,7 @@
 apply plugin: 'pmd'
 
 pmd {
-    toolVersion '6.2.0'
+    toolVersion '6.7.0'
 }
 
 task pmd(type: Pmd) {
