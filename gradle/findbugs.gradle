@@ -10,7 +10,7 @@ task findbugs(type: FindBugs, dependsOn: 'compileDebugSources') {
 
     outputs.upToDateWhen { false }
 
-    classes = fileTree("$buildDir/intermediates/classes")
+    classes = fileTree("$buildDir/intermediates/javac")
     excludeFilter file("$rootDir/config/findbugs/findbugs-exclude.xml")
     source fileTree('src/main/java')
     effort 'max'

@@ -32,7 +32,7 @@ afterEvaluate {
             description = "Creates unified test coverage reports for the ${name} variant."
 
             classDirectories = fileTree(
-                    dir: "$buildDir/intermediates/classes/$name",
+                    dir: "$buildDir/intermediates/javac/$name",
                     excludes: [
                             '**/R.class',
                             '**/R$*.class',
