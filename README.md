@@ -1,6 +1,6 @@
 # android-quality-template
 
-[![Build Status][1]][2]
+[![ci][1]][2]
 
 A sample project that illustrates integration of code quality tools:
 
@@ -31,5 +31,5 @@ The tasks can be run individually, and are integrated with the `check` task:
     See the License for the specific language governing permissions and
     limitations under the License.
 
-[1]: https://travis-ci.org/friederbluemle/android-quality-template.svg?branch=master
-[2]: https://travis-ci.org/friederbluemle/android-quality-template
+[1]: https://github.com/fbluemle/android-quality-template/workflows/ci/badge.svg
+[2]: https://github.com/fbluemle/android-quality-template/actions
