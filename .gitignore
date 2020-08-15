@@ -1,18 +1,9 @@
-# Gradle files
-.gradle/
-build/
-
-# Local configuration file (sdk path, etc)
-local.properties
-
-# Android Studio generated folders
-.navigation/
-captures/
-.externalNativeBuild
-
-# IntelliJ project files
 *.iml
+.gradle/
+local.properties
 .idea/
-
-# Misc
 .DS_Store
+build/
+captures/
+.externalNativeBuild/
+.cxx/

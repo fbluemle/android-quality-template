@@ -4,7 +4,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.3.2'
+        classpath 'com.android.tools.build:gradle:3.6.4'
     }
 }
 
@@ -15,7 +15,7 @@ allprojects {
         google()
         jcenter()
     }
-    group 'com.fbluemle.quality'
+    group 'org.fbluemle.quality'
     version gitTagVersionName
 }
 
