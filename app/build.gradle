@@ -12,8 +12,8 @@ android {
         applicationId "org.fbluemle.quality"
         minSdkVersion 15
         targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        versionCode gitTagVersionCode
+        versionName version
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -24,6 +24,19 @@ android {
     }
     lintOptions {
         warningsAsErrors true
+    }
+    applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            outputFileName = outputFileName.replace(".apk", "-${version}.apk")
+            if (variant.buildType.isMinifyEnabled()) {
+                variant.assemble.doLast {
+                    variant.mappingFile.renameTo(
+                            variant.mappingFile.parent + "/"
+                                    + outputFileName.replace(".apk", "-")
+                                    + variant.mappingFile.name)
+                }
+            }
+        }
     }
 }
 

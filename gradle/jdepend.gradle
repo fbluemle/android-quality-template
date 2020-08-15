@@ -8,7 +8,7 @@ task jdepend(type: JDepend, dependsOn: 'compileDebugSources') {
     description 'Analyzes package dependencies and generates design quality metrics.'
     group 'verification'
 
-    classesDirs = files(file("$buildDir/intermediates/classes/debug"))
+    classesDirs = files(file("$buildDir/intermediates/javac/debug"))
 
     reports {
         xml.enabled true
