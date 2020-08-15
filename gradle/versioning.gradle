@@ -1,0 +1,15 @@
+def gitDescribe = "git -C ${rootDir} describe --tags --long --dirty".execute().text.trim()
+def (tag, commitsString, hash, dirty) = gitDescribe ? gitDescribe.tokenize('-') : []
+def (tagMajor, tagMinor, tagPatch) = tag ? tag.tokenize('.') : []
+def commits = commitsString ? commitsString.toInteger() : 0
+def tmpMajor = tagMajor ? tagMajor.replaceAll('^v', '') : ''
+def major = (tmpMajor && tmpMajor.isNumber()) ? tmpMajor.toInteger() : 0
+def minor = (tagMinor && tagMinor.isNumber()) ? tagMinor.toInteger() : 0
+def patch = (tagPatch && tagPatch.isNumber()) ? tagPatch.toInteger() : 1
+def cleanGitTag = gitDescribe && tag && commits == 0 && dirty != 'dirty'
+
+ext {
+    gitTagVersionCode = major * 10000 + minor * 100 + patch
+    gitTagVersionName = "$major.$minor.$patch" + (cleanGitTag ? '' : '-SNAPSHOT')
+    logger.lifecycle(String.format('Version: %s (%d)', gitTagVersionName, gitTagVersionCode))
+}

@@ -8,11 +8,15 @@ buildscript {
     }
 }
 
+apply from: 'gradle/versioning.gradle'
+
 allprojects {
     repositories {
         google()
         jcenter()
     }
+    group 'com.fbluemle.quality'
+    version gitTagVersionName
 }
 
 task clean(type: Delete) {
