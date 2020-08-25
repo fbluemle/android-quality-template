@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">android-quality-template</string>
+    <string name="text1">On command line, run</string>
+    <string name="command">./gradlew check</string>
+    <string name="text2">Reports will be generated in <b>app/build/reports/</b> with the following tools:</string>
+    <string name="tools">• Checkstyle\n• FindBugs\n• JDepend\n• PMD</string>
 </resources>
